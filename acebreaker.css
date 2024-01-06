@@ -28,6 +28,14 @@ button {
     width:100px;
     margin:8px auto;
 }
+
+input[type="number"] {
+    height:20px;
+    width:92px;
+    margin:8px auto;
+    text-align: right;
+}
+
 img.preload {
     display:none;
 }
@@ -109,6 +117,40 @@ a:visited {color:blue;}
     top:192px;
     z-index: 999;
     font-size: 0.85em;
+}
+
+#player-money {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #ffffff;
+    font-size: 1.3em;
+}
+
+#win-amount {
+    position: absolute;
+    right: 10px;
+    bottom: 35px;
+    font-size: 1.1em;
+}
+
+#bet-dealer {
+    position: absolute;
+    left:350px;
+    top:135px;
+}
+
+#bet-player {
+    position: absolute;
+    left:350px;
+    top:210px;
+}
+
+#bet-slider {
+    position: absolute;
+    left:455px;
+    top:220px;
+    width: 105px;
 }
 
 footer {

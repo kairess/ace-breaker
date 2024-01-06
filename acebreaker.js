@@ -1,5 +1,7 @@
 const CARD_SPEED = 109;
 const JOKER_PROB = 1 / 52;
+const SCHOOL_MONEY = 10_000;
+const FOLD_PENALTY = 20_000;
 
 cards.init({
     table:'#card-table',
@@ -24,6 +26,10 @@ let done = [false, false, false];
 let wins = [false, false, false];
 let times = 1.0;
 
+let playerMoney = 1_000_000;
+let betDealer = 0;
+let betPlayer = 0;
+
 let init = () => {
     $('#new-game').hide();
     $('#close-bet').hide();
@@ -34,12 +40,18 @@ let init = () => {
     $('#card-c0').text('');
     $('#card-c1').text('');
     $('#card-c2').text('');
+    $('#bet-dealer').hide();
+    $('#bet-player').hide();
+    $('#bet-slider').hide();
+    $('#win-amount').hide();
 
     upperHasJoker = false;
     lowerHasJoker = false;
     done = [false, false, false];
     wins = [false, false, false];
     times = 1.0;
+    betDealer = 0;
+    betPlayer = 0;
 
     jokerLower.el.hide();
     jokerLower.moveTo(550, 340);
@@ -57,8 +69,15 @@ let init = () => {
     lowerhand = new cards.Hand({faceUp:true, y:340});
 }
 
+let updatePlayerMoney = (amount) => {
+    playerMoney += amount;
+    $('#player-money').text(playerMoney.toLocaleString());
+}
+
 $('#deal').click(() => {
     $('#deal').hide();
+
+    updatePlayerMoney(-SCHOOL_MONEY);
 
     deck.deal(3, [upperhand, lowerhand], CARD_SPEED, () => {
         $('#redeal').show();
@@ -112,8 +131,27 @@ $('#place-bet').click(() => {
     $('#close-bet').show();
     $('#fold').show();
 
-    $('#bet-dealer').val(10000);
-    $('#bet-player').val(10000);
+    betDealer = Math.floor(Math.random() * 1_000) * 100;
+
+    if (betDealer > playerMoney)
+        betDealer = playerMoney;
+
+    $('#bet-slider').attr('min', betDealer);
+    $('#bet-slider').attr('max', playerMoney);
+    $('#bet-slider').attr('value', betDealer);
+    $('#bet-slider').attr('step', 1_000);
+
+    $('#bet-dealer').val(betDealer);
+    $('#bet-player').val(betDealer);
+
+    $('#bet-dealer').show();
+    $('#bet-player').show();
+    $('#bet-slider').show();
+});
+
+$('#bet-slider').on('input', () => {
+    betPlayer = $('#bet-slider').val();
+    $('#bet-player').val(betPlayer);
 });
 
 let setText = (i, text) => {
@@ -181,14 +219,20 @@ let moveLowerJoker = (i) => {
 };
 
 $('#close-bet').click(() => {
-    let betDealer = parseInt($('#bet-dealer').val());
-    let betPlayer = parseInt($('#bet-player').val());
+    $('#bet-dealer').hide();
+    $('#bet-player').hide();
+    $('#bet-slider').hide();
 
-    if (!betPlayer || betPlayer <= 0) {
-        return alert('0보다 큰 금액을 베팅해야 합니다!');
-    } else if (betPlayer < betDealer) {
+    betDealer = parseInt($('#bet-dealer').val());
+    betPlayer = parseInt($('#bet-player').val());
+
+    if (betPlayer < betDealer) {
         return alert('딜러보다 높은 금액을 베팅해야 합니다!');
+    } else if (betPlayer > playerMoney) {
+        return alert('소지 금액보다 더 높은 금액을 베팅할 수 없습니다!');
     }
+
+    updatePlayerMoney(-betPlayer);
 
     $('#close-bet').hide();
     $('#fold').hide();
@@ -264,13 +308,29 @@ $('#close-bet').click(() => {
     }
 
     setTimeout(() => {
-        console.log(wins, times);
+        let score = 0;
+        for(let i = 0; i < wins.length; i++) {
+            score += wins[i];
+        }
+
+        const winAmount = parseInt((betDealer + betPlayer) * times);
+
+        if (score > 0) {
+            updatePlayerMoney(winAmount);
+            $('#win-amount').text(winAmount.toLocaleString()).css({color: 'darkblue'}).show();
+        } else if (score < 0) {
+            updatePlayerMoney(-winAmount);
+            $('#win-amount').text((-winAmount).toLocaleString()).css({color: 'orangered'}).show();
+        } else {
+            updatePlayerMoney(betPlayer + SCHOOL_MONEY);
+        }
 
         $('#new-game').show();
     }, CARD_SPEED * 4 * 3);
 });
 
 $('#fold').click(() => {
+    updatePlayerMoney(-FOLD_PENALTY);
     init();
 });
 
