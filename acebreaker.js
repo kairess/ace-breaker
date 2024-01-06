@@ -141,13 +141,15 @@ $('#place-bet').click(() => {
     if (betDealer > playerMoney)
         betDealer = playerMoney;
 
+    betPlayer = betDealer;
+
     $('#bet-slider').attr('min', betDealer);
     $('#bet-slider').attr('max', playerMoney);
-    $('#bet-slider').attr('value', betDealer);
+    $('#bet-slider').attr('value', betPlayer);
     $('#bet-slider').attr('step', 1_000);
 
     $('#bet-dealer').val(betDealer);
-    $('#bet-player').val(betDealer);
+    $('#bet-player').val(betPlayer);
 
     $('#bet-dealer').show();
     $('#bet-player').show();
@@ -155,7 +157,7 @@ $('#place-bet').click(() => {
 });
 
 $('#bet-slider').on('input', () => {
-    betPlayer = $('#bet-slider').val();
+    betPlayer = parseInt($('#bet-slider').val());
     $('#bet-player').val(betPlayer);
 });
 
@@ -349,6 +351,37 @@ $('#fold').click(() => {
 
 $('#new-game').click(() => {
     init();
+});
+
+$(document).keyup((e) => {
+    const visibleButtons = $('button').filter(function() {
+        return $(this).css('display') !== 'none';
+    });
+
+    let betSlider = $('#bet-slider');
+
+    switch (e.key) {
+        case 'a':
+        case 'A':
+        case 'ㅁ':
+            visibleButtons.first().click();
+            break;
+        case 'd':
+        case 'D':
+        case 'ㅇ':
+            if (visibleButtons.length > 1) {
+                visibleButtons.eq(1).click();
+            }
+            break;
+        case 'ArrowLeft':
+            betSlider.val(betPlayer - parseInt(betSlider.attr('step'))).trigger('input');
+            break;
+        case 'ArrowRight':
+            betSlider.val(betPlayer + parseInt(betSlider.attr('step'))).trigger('input');;
+            break;
+        default:
+            break;
+    }
 });
 
 init();
