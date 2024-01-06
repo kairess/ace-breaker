@@ -1,20 +1,24 @@
-html { 
+html {
     background-color:#092E20;
 }
 
-body { 
+body {
     position:relative;
-    border-radius:8px;
-    box-shadow:black 0px 0px 2px; 
-    width: 600px; 
+    box-shadow:black 0px 0px 2px;
+    width: 1280px;
     background:#FFF;
     margin:20px auto;
     border:solid 1px black;
     font-family: 'Noto Sans KR', sans-serif;
-    padding:50px;
+    padding:15px 50px;
 }
 #buttons {
     text-align:center;
+}
+
+a {
+    text-decoration: none;
+    color: brown;
 }
 
 a img {
@@ -40,66 +44,68 @@ img.preload {
     display:none;
 }
 h1 {
+    font-family: 'Metal Mania', system-ui;
+    color: #111;
+    font-size: 5em;
     text-align:center;
     padding:0px;
     margin:10px auto;
 }
 
 #card-table {
-    background-color:green;
-    height:400px;
-    width:600px;
+    background-color:#3d3d3d;
+    height:720px;
+    width:1280px;
     border:solid 6px brown;
     box-shadow:#111 1px 1px 2px;
 }
-a:visited {color:blue;}
 
 #deal {
     position: absolute;
-    left:350px;
-    top:170px;
+    left:1000px;
+    top:338px;
 }
 
 #redeal {
     position: absolute;
-    left:460px;
-    top:170px;
+    left:1120px;
+    top:338px;
 }
 
 #place-bet {
     position: absolute;
-    left:350px;
-    top:170px;
+    left:1000px;
+    top:338px;
 }
 
 #fold {
     position: absolute;
-    left:460px;
-    top:170px;
+    left:1120px;
+    top:338px;
 }
 
 #new-game {
     position: absolute;
-    left:460px;
-    top:170px;
+    left:1000px;
+    top:338px;
 }
 
 #open {
     position: absolute;
-    left:460px;
-    top:170px;
+    left:1000px;
+    top:338px;
 }
 
 #close-bet {
     position: absolute;
-    left:350px;
-    top:170px;
+    left:1000px;
+    top:338px;
 }
 
 #card-c0 {
     position: absolute;
-    left:167px;
-    top:187px;
+    left:408px;
+    top:347px;
     z-index: 999;
     width: 69px;
     text-align: center;
@@ -107,8 +113,8 @@ a:visited {color:blue;}
 
 #card-c1 {
     position: absolute;
-    left:267px;
-    top:187px;
+    left:608px;
+    top:347px;
     z-index: 999;
     width: 69px;
     text-align: center;
@@ -116,48 +122,76 @@ a:visited {color:blue;}
 
 #card-c2 {
     position: absolute;
-    left:367px;
-    top:187px;
+    left:808px;
+    top:347px;
     z-index: 999;
     width: 69px;
     text-align: center;
 }
 
+#high-c0 {
+    color: deepskyblue;
+    position: absolute;
+    left:408px;
+    top:470px;
+    width: 69px;
+    text-align: center;
+}
+
+#low-c1 {
+    color: orangered;
+    position: absolute;
+    left:608px;
+    top:470px;
+    width: 69px;
+    text-align: center;
+}
+
+#high-c2 {
+    color: deepskyblue;
+    position: absolute;
+    left:808px;
+    top:470px;
+    width: 69px;
+    text-align: center;
+}
+
+
 span.card-c-number {
-    font-size: 0.85em;
+    font-size: 1em;
 }
 
 #player-money {
     position: absolute;
-    right: 10px;
+    right: 15px;
     bottom: 10px;
     color: #ffffff;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 #win-amount {
     position: absolute;
-    right: 10px;
-    bottom: 35px;
-    font-size: 1.1em;
+    right: 15px;
+    bottom: 40px;
+    font-size: 1.2em;
 }
 
 #bet-dealer {
     position: absolute;
-    left:350px;
-    top:135px;
+    left:1000px;
+    top:300px;
 }
 
 #bet-player {
     position: absolute;
-    left:350px;
-    top:210px;
+    left:1000px;
+    top:380px;
 }
 
 #bet-slider {
     position: absolute;
-    left:455px;
-    top:220px;
+    left:1116px;
+    top:392px;
     width: 105px;
 }
 

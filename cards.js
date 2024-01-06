@@ -106,6 +106,7 @@ var cards = (function() {
       this.el = $('<div/>').css({
         width: opt.cardSize.width,
         height: opt.cardSize.height,
+        'background-size': '1400%', // WHY?
         "background-image": 'url(' + opt.cardsUrl + ')',
         position: 'absolute',
         cursor: 'pointer'

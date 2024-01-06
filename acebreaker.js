@@ -1,14 +1,15 @@
-const CARD_SPEED = 109;
+const CARD_SPEED = 300;
 const JOKER_PROB = 1 / 52;
 const SCHOOL_MONEY = 10_000;
 const FOLD_PENALTY = 20_000;
 
 cards.init({
     table:'#card-table',
+    cardsUrl: 'img/gangs.png',
     cardSize: {
-        width: 69,
-        height: 94,
-        padding: 100
+        width: 135,
+        height: 186,
+        padding: 200
     }
 });
 
@@ -47,6 +48,7 @@ let init = () => {
     $('#bet-player').hide();
     $('#bet-slider').hide();
     $('#win-amount').hide();
+    $('.high-low').hide();
 
     upperHasJoker = false;
     lowerHasJoker = false;
@@ -59,10 +61,10 @@ let init = () => {
     isOpening = false;
 
     jokerLower.el.hide();
-    jokerLower.moveTo(50, 340);
+    jokerLower.moveTo(100, 600);
 
     jokerUpper.el.hide();
-    jokerUpper.moveTo(50, 60);
+    jokerUpper.moveTo(300, 120);
 
     deck.removeCard(cards.all);
 
@@ -70,8 +72,8 @@ let init = () => {
     cards.shuffle(deck);
     deck.render({immediate:true});
 
-    upperhand = new cards.Hand({faceUp:false, y:60});
-    lowerhand = new cards.Hand({faceUp:true, y:340});
+    upperhand = new cards.Hand({faceUp:false, y:120});
+    lowerhand = new cards.Hand({faceUp:true, y:600});
 }
 
 let updatePlayerMoney = (amount) => {
@@ -96,6 +98,8 @@ $('#deal').click(() => {
         if (Math.random() < JOKER_PROB) {
             upperHasJoker = true;
         }
+
+        $('.high-low').show();
     });
 });
 
@@ -106,7 +110,7 @@ $('#redeal').click(() => {
 
     for (let i = lowerhand.length - 1; i >= 0; i--) {
         lowerhand[i].hideCard();
-        lowerhand[i].moveTo(50 + i * 10, 340, CARD_SPEED, () => {
+        lowerhand[i].moveTo(80 + i * 10, 600, CARD_SPEED, () => {
             lowerhand.removeCard(lowerhand[i]);
         });
     }
@@ -117,6 +121,7 @@ $('#redeal').click(() => {
 
             if (Math.random() < JOKER_PROB) {
                 lowerHasJoker = true;
+                jokerLower.moveToFront();
                 jokerLower.el.show();
             }
 
@@ -166,17 +171,17 @@ let setText = (i, text) => {
 
     switch (text) {
         case 'Win(AB)':
-            numberContainer.text(text).css({color: 'darkblue'});
+            numberContainer.text(text).css({color: 'deepskyblue'});
             wins[i] = 1;
             times += 1;
             break;
         case 'Win(A)':
-            numberContainer.text(text).css({color: 'darkblue'});
+            numberContainer.text(text).css({color: 'deepskyblue'});
             wins[i] = 1;
             times += 0.5;
             break;
         case 'Win':
-            numberContainer.text(text).css({color: 'darkblue'});
+            numberContainer.text(text).css({color: 'deepskyblue'});
             wins[i] = 1;
             break;
         case 'Lose(AB)':
@@ -218,13 +223,13 @@ let moveUpperJoker = (i) => {
     upperHasJoker = false;
     jokerUpper.el.show();
     jokerUpper.moveToFront();
-    jokerUpper.moveTo(upperhand[i].targetLeft + 50, upperhand[i].targetTop + 110, CARD_SPEED);
+    jokerUpper.moveTo(upperhand[i].targetLeft + 100, upperhand[i].targetTop + 200, CARD_SPEED);
 };
 
 let moveLowerJoker = (i) => {
     lowerHasJoker = false;
     jokerLower.moveToFront();
-    jokerLower.moveTo(lowerhand[i].targetLeft + 50, lowerhand[i].targetTop - 15, CARD_SPEED);
+    jokerLower.moveTo(lowerhand[i].targetLeft + 100, lowerhand[i].targetTop - 15, CARD_SPEED);
 };
 
 $('#close-bet').click(() => {
@@ -257,11 +262,11 @@ $('#open').click(() => {
     if (isOpening) return false;
     isOpening = true;
 
-    upperhand[iOpen].moveTo(upperhand[iOpen].x, 140, CARD_SPEED * 2, () => {
+    upperhand[iOpen].moveTo(upperhand[iOpen].x, 250, CARD_SPEED * 2, () => {
         upperhand[iOpen].showCard();
     });
 
-    lowerhand[iOpen].moveTo(lowerhand[iOpen].x, 260, CARD_SPEED * 2, () => {
+    lowerhand[iOpen].moveTo(lowerhand[iOpen].x, 470, CARD_SPEED * 2, () => {
         // Ace Breaker
         if (upperhand[iOpen].rank == 1 || lowerhand[iOpen].rank == 1) {
             if (upperhand[iOpen].rank == 1 && lowerhand[iOpen].rank == 1) {
@@ -336,7 +341,7 @@ $('#open').click(() => {
 
             if (score > 0) {
                 updatePlayerMoney(winAmount);
-                $('#win-amount').text(winAmountText).css({color: 'darkblue'}).show();
+                $('#win-amount').text(winAmountText).css({color: 'deepskyblue'}).show();
             } else if (score < 0) {
                 updatePlayerMoney(-winAmount);
                 $('#win-amount').text(winAmountText).css({color: 'orangered'}).show();
