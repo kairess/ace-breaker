@@ -129,6 +129,30 @@ h1 {
     text-align: center;
 }
 
+#pop-c0 {
+    position: absolute;
+    left:288px;
+    top:260px;
+    z-index: 9999;
+    width: 300px;
+}
+
+#pop-c1 {
+    position: absolute;
+    left:488px;
+    top:260px;
+    z-index: 9999;
+    width: 300px;
+}
+
+#pop-c2 {
+    position: absolute;
+    left:688px;
+    top:260px;
+    z-index: 9999;
+    width: 300px;
+}
+
 #high-c0 {
     color: deepskyblue;
     position: absolute;
@@ -208,3 +232,4 @@ footer a, footer a:visited{
 footer a:hover {
     color:black;
 }
+

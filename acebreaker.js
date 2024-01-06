@@ -49,6 +49,7 @@ let init = () => {
     $('#bet-slider').hide();
     $('#win-amount').hide();
     $('.high-low').hide();
+    $('.pop').hide();
 
     upperHasJoker = false;
     lowerHasJoker = false;
@@ -168,21 +169,25 @@ $('#bet-slider').on('input', () => {
 
 let setText = (i, text) => {
     const numberContainer = $(`#card-c${i} .card-c-number`);
+    const popContainer = $(`#pop-c${i}`);
 
     switch (text) {
         case 'Win(AB)':
             numberContainer.text(text).css({color: 'deepskyblue'});
             wins[i] = 1;
             times += 1;
+            popContainer.show();
             break;
         case 'Win(A)':
             numberContainer.text(text).css({color: 'deepskyblue'});
             wins[i] = 1;
             times += 0.5;
+            popContainer.show();
             break;
         case 'Win':
             numberContainer.text(text).css({color: 'deepskyblue'});
             wins[i] = 1;
+            popContainer.show();
             break;
         case 'Lose(AB)':
             numberContainer.text(text).css({color: 'orangered'});
