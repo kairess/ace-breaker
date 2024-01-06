@@ -330,13 +330,16 @@ $('#open').click(() => {
             }
 
             const winAmount = parseInt((betDealer + betPlayer) * times);
+            let winAmountText = `${betDealer.toLocaleString()}+${betPlayer.toLocaleString()}`;
+            if (times != 1)
+                winAmountText = '(' + winAmountText + ')' + `×${times}`;
 
             if (score > 0) {
                 updatePlayerMoney(winAmount);
-                $('#win-amount').text(winAmount.toLocaleString()).css({color: 'darkblue'}).show();
+                $('#win-amount').text(winAmountText).css({color: 'darkblue'}).show();
             } else if (score < 0) {
                 updatePlayerMoney(-winAmount);
-                $('#win-amount').text((-winAmount).toLocaleString()).css({color: 'orangered'}).show();
+                $('#win-amount').text(winAmountText).css({color: 'orangered'}).show();
             } else {
                 updatePlayerMoney(betPlayer + SCHOOL_MONEY);
             }

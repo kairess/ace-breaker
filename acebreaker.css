@@ -1,24 +1,24 @@
 html { 
-    background-color:#092E20; 
+    background-color:#092E20;
 }
 
 body { 
     position:relative;
-    border-radius:8px; 
+    border-radius:8px;
     box-shadow:black 0px 0px 2px; 
     width: 600px; 
-    background:#FFF; 
-    margin:20px auto; 
-    border:solid 1px black; 
-    font-family: arial, sans-serif; 
-    padding:50px;  
+    background:#FFF;
+    margin:20px auto;
+    border:solid 1px black;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding:50px;
 }
 #buttons {
     text-align:center;
 }
 
 a img {
-    position: absolute; 
+    position: absolute;
     top: 0;
     right: 0;
     border: 0;
@@ -99,7 +99,7 @@ a:visited {color:blue;}
 #card-c0 {
     position: absolute;
     left:167px;
-    top:190px;
+    top:187px;
     z-index: 999;
     width: 69px;
     text-align: center;
@@ -108,7 +108,7 @@ a:visited {color:blue;}
 #card-c1 {
     position: absolute;
     left:267px;
-    top:190px;
+    top:187px;
     z-index: 999;
     width: 69px;
     text-align: center;
@@ -117,7 +117,7 @@ a:visited {color:blue;}
 #card-c2 {
     position: absolute;
     left:367px;
-    top:190px;
+    top:187px;
     z-index: 999;
     width: 69px;
     text-align: center;
