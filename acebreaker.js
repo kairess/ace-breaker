@@ -31,6 +31,7 @@ let betDealer = 0;
 let betPlayer = 0;
 
 let iOpen = 0;
+let isOpening = false;
 
 let init = () => {
     $('#new-game').hide();
@@ -55,6 +56,7 @@ let init = () => {
     betDealer = 0;
     betPlayer = 0;
     iOpen = 0;
+    isOpening = false;
 
     jokerLower.el.hide();
     jokerLower.moveTo(50, 340);
@@ -248,6 +250,9 @@ $('#close-bet').click(() => {
 });
 
 $('#open').click(() => {
+    if (isOpening) return false;
+    isOpening = true;
+
     upperhand[iOpen].moveTo(upperhand[iOpen].x, 140, CARD_SPEED * 2, () => {
         upperhand[iOpen].showCard();
     });
@@ -310,30 +315,31 @@ $('#open').click(() => {
             }
 
         iOpen++;
+        isOpening = false;
+
+        if (iOpen == 3) {
+            $('#open').hide();
+
+            let score = 0;
+            for(let i = 0; i < wins.length; i++) {
+                score += wins[i];
+            }
+
+            const winAmount = parseInt((betDealer + betPlayer) * times);
+
+            if (score > 0) {
+                updatePlayerMoney(winAmount);
+                $('#win-amount').text(winAmount.toLocaleString()).css({color: 'darkblue'}).show();
+            } else if (score < 0) {
+                updatePlayerMoney(-winAmount);
+                $('#win-amount').text((-winAmount).toLocaleString()).css({color: 'orangered'}).show();
+            } else {
+                updatePlayerMoney(betPlayer + SCHOOL_MONEY);
+            }
+
+            $('#new-game').show();
+        }
     }, CARD_SPEED);
-
-    if (iOpen >= 2) {
-        $('#open').hide();
-
-        let score = 0;
-        for(let i = 0; i < wins.length; i++) {
-            score += wins[i];
-        }
-
-        const winAmount = parseInt((betDealer + betPlayer) * times);
-
-        if (score > 0) {
-            updatePlayerMoney(winAmount);
-            $('#win-amount').text(winAmount.toLocaleString()).css({color: 'darkblue'}).show();
-        } else if (score < 0) {
-            updatePlayerMoney(-winAmount);
-            $('#win-amount').text((-winAmount).toLocaleString()).css({color: 'orangered'}).show();
-        } else {
-            updatePlayerMoney(betPlayer + SCHOOL_MONEY);
-        }
-
-        $('#new-game').show();
-    }
 });
 
 $('#fold').click(() => {
