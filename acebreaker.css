@@ -1,7 +1,7 @@
 body {
     position:relative;
     width: 1280px;
-    background:#FFF;
+    background: #680000;
     margin:0px auto;
     font-family: 'Noto Sans KR', sans-serif;
     margin-top: 50px;
@@ -18,9 +18,16 @@ body {
     text-align:center;
 }
 
+.link {
+    font-size: 1em;
+    text-align: center;
+    margin-bottom: 1em;
+    color: rgb(178, 178, 178);
+}
+
 a {
     text-decoration: none;
-    color: brown;
+    color: rgb(178, 178, 178);
 }
 
 a img {
@@ -55,10 +62,10 @@ h1 {
 }
 
 #card-table {
-    background-color:#3d3d3d;
+    background-color:#303030;
     height:720px;
     width:1280px;
-    border:solid 6px brown;
+    border:solid 6px rgb(0, 0, 0);
     box-shadow:#111 1px 1px 2px;
 }
 
