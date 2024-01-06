@@ -296,8 +296,8 @@ var cards = (function() {
       var condenseCount = 6;
       for (var i = 0; i < this.length; i++) {
         if (i > 0 && i % condenseCount == 0) {
-          top -= 1;
-          left -= 1;
+          top -= opt.cardSize.height / 94;
+          left -= opt.cardSize.width / 69;
         }
         this[i].targetTop = top;
         this[i].targetLeft = left;
