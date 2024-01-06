@@ -1,17 +1,19 @@
-html {
-    background-color:#092E20;
-}
-
 body {
     position:relative;
-    box-shadow:black 0px 0px 2px;
     width: 1280px;
     background:#FFF;
-    margin:20px auto;
-    border:solid 1px black;
+    margin:0px auto;
     font-family: 'Noto Sans KR', sans-serif;
-    padding:15px 50px;
+    margin-top: 50px;
 }
+
+#skull {
+    position: absolute;
+    left: 870px;
+    top: -10px;
+    width: 80px;
+}
+
 #buttons {
     text-align:center;
 }
