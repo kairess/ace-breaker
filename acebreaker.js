@@ -142,7 +142,7 @@ $('#place-bet').click(() => {
     $('#close-bet').show();
     $('#fold').show();
 
-    betDealer = Math.floor(Math.random() * 1_000) * 100;
+    betDealer = Math.floor((Math.random() * 1_000_000) / 10_000) * 10_000 + 10_000;
 
     if (betDealer > playerMoney)
         betDealer = playerMoney;
@@ -152,7 +152,7 @@ $('#place-bet').click(() => {
     $('#bet-slider').attr('min', betDealer);
     $('#bet-slider').attr('max', playerMoney);
     $('#bet-slider').attr('value', betPlayer);
-    $('#bet-slider').attr('step', 1_000);
+    $('#bet-slider').attr('step', 10_000);
 
     $('#bet-dealer').val(betDealer);
     $('#bet-player').val(betPlayer);
@@ -238,10 +238,6 @@ let moveLowerJoker = (i) => {
 };
 
 $('#close-bet').click(() => {
-    $('#bet-dealer').hide();
-    $('#bet-player').hide();
-    $('#bet-slider').hide();
-
     betDealer = parseInt($('#bet-dealer').val());
     betPlayer = parseInt($('#bet-player').val());
 
@@ -250,6 +246,12 @@ $('#close-bet').click(() => {
     } else if (betPlayer > playerMoney) {
         return alert('소지 금액보다 더 높은 금액을 베팅할 수 없습니다!');
     }
+
+    $('#bet-dealer').hide();
+    $('#bet-player').hide();
+    $('#bet-slider').hide();
+
+    updatePlayerMoney(-betPlayer);
 
     $('#close-bet').hide();
     $('#fold').hide();
@@ -337,18 +339,19 @@ $('#open').click(() => {
                 score += wins[i];
             }
 
-            const winAmount = parseInt((betDealer + betPlayer) * times);
-            let winAmountText = `${betDealer.toLocaleString()}+${betPlayer.toLocaleString()}`;
-            if (times != 1)
-                winAmountText = '(' + winAmountText + ')' + `×${times}`;
+            if (score > 0) { // 플레이어 승리
+                const winAmount = parseInt(betDealer + betPlayer * times);
+                let winAmountText = `${betDealer.toLocaleString()}+${betPlayer.toLocaleString()}×${times - 1.0}`;
 
-            if (score > 0) {
                 updatePlayerMoney(winAmount + SCHOOL_MONEY);
                 $('#win-amount').text(winAmountText).css({color: 'deepskyblue'}).show();
-            } else if (score < 0) {
+            } else if (score < 0) { // 딜러 승리
+                const winAmount = parseInt(betDealer * (times - 1.0));
+                let winAmountText = `${betDealer.toLocaleString()}×${times - 1.0}`;
+
                 updatePlayerMoney(-winAmount);
                 $('#win-amount').text(winAmountText).css({color: 'orangered'}).show();
-            } else {
+            } else { // 무승부
                 updatePlayerMoney(betPlayer + SCHOOL_MONEY);
             }
 
