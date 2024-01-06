@@ -312,7 +312,7 @@ $('#open').click(() => {
         iOpen++;
     }, CARD_SPEED);
 
-    if (iOpen == 2) {
+    if (iOpen >= 2) {
         $('#open').hide();
 
         let score = 0;
