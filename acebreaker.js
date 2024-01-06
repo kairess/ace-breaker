@@ -54,7 +54,7 @@ let init = () => {
     betPlayer = 0;
 
     jokerLower.el.hide();
-    jokerLower.moveTo(550, 340);
+    jokerLower.moveTo(50, 340);
 
     jokerUpper.el.hide();
     jokerUpper.moveTo(50, 60);
