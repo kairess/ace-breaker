@@ -114,28 +114,34 @@ h1 {
 #card-c0 {
     position: absolute;
     left:408px;
-    top:347px;
+    top:350px;
     z-index: 999;
     width: 69px;
     text-align: center;
+    font-family: 'Metal Mania', system-ui;
+    text-transform: uppercase;
 }
 
 #card-c1 {
     position: absolute;
     left:608px;
-    top:347px;
+    top:350px;
     z-index: 999;
     width: 69px;
     text-align: center;
+    font-family: 'Metal Mania', system-ui;
+    text-transform: uppercase;
 }
 
 #card-c2 {
     position: absolute;
     left:808px;
-    top:347px;
+    top:350px;
     z-index: 999;
     width: 69px;
     text-align: center;
+    font-family: 'Metal Mania', system-ui;
+    text-transform: uppercase;
 }
 
 #pop-c0 {
