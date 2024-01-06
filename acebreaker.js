@@ -30,6 +30,8 @@ let playerMoney = 1_000_000;
 let betDealer = 0;
 let betPlayer = 0;
 
+let iOpen = 0;
+
 let init = () => {
     $('#new-game').hide();
     $('#close-bet').hide();
@@ -52,6 +54,7 @@ let init = () => {
     times = 1.0;
     betDealer = 0;
     betPlayer = 0;
+    iOpen = 0;
 
     jokerLower.el.hide();
     jokerLower.moveTo(50, 340);
@@ -241,73 +244,77 @@ $('#close-bet').click(() => {
         card.moveTo(100, card.y, CARD_SPEED);
     }
 
-    for (let i = 0; i < upperhand.length; i++) {
-        setTimeout(() => {
-            upperhand[i].moveTo(upperhand[i].x, 140, CARD_SPEED * 2, () => {
-                upperhand[i].showCard();
-            });
+    $('#open').show();
+});
 
-            lowerhand[i].moveTo(lowerhand[i].x, 260, CARD_SPEED * 2, () => {
-                // Ace Breaker
-                if (upperhand[i].rank == 1 || lowerhand[i].rank == 1) {
-                    if (upperhand[i].rank == 1 && lowerhand[i].rank == 1) {
-                        if (upperHasJoker && lowerHasJoker) {
-                            moveUpperJoker(i);
-                            moveLowerJoker(i);
-                            setText(i, 'Draw(AB)');
-                        } else if (upperHasJoker) {
-                            moveUpperJoker(i);
-                            setText(i, 'Lose(AB)');
-                        } else if (lowerHasJoker) {
-                            moveLowerJoker(i);
-                            setText(i, 'Win(AB)');
-                        } else {
-                            setText(i, 'Draw(A)');
-                        }
-                    } else if (upperhand[i].rank == 1 && lowerHasJoker) {
-                        moveLowerJoker(i);
-                        setText(i, 'Win(AB)');
-                    } else if (lowerhand[i].rank == 1 && upperHasJoker) {
-                        moveUpperJoker(i);
-                        setText(i, 'Lose(AB)');
-                    } else if (upperhand[i].rank == 1) {
-                        setText(i, 'Lose(A)');
-                    } else if (lowerhand[i].rank == 1) {
-                        setText(i, 'Win(A)');
-                    }
+$('#open').click(() => {
+    upperhand[iOpen].moveTo(upperhand[iOpen].x, 140, CARD_SPEED * 2, () => {
+        upperhand[iOpen].showCard();
+    });
+
+    lowerhand[iOpen].moveTo(lowerhand[iOpen].x, 260, CARD_SPEED * 2, () => {
+        // Ace Breaker
+        if (upperhand[iOpen].rank == 1 || lowerhand[iOpen].rank == 1) {
+            if (upperhand[iOpen].rank == 1 && lowerhand[iOpen].rank == 1) {
+                if (upperHasJoker && lowerHasJoker) {
+                    moveUpperJoker(iOpen);
+                    moveLowerJoker(iOpen);
+                    setText(iOpen, 'Draw(AB)');
+                } else if (upperHasJoker) {
+                    moveUpperJoker(iOpen);
+                    setText(iOpen, 'Lose(AB)');
+                } else if (lowerHasJoker) {
+                    moveLowerJoker(iOpen);
+                    setText(iOpen, 'Win(AB)');
+                } else {
+                    setText(iOpen, 'Draw(A)');
                 }
+            } else if (upperhand[iOpen].rank == 1 && lowerHasJoker) {
+                moveLowerJoker(iOpen);
+                setText(iOpen, 'Win(AB)');
+            } else if (lowerhand[iOpen].rank == 1 && upperHasJoker) {
+                moveUpperJoker(iOpen);
+                setText(iOpen, 'Lose(AB)');
+            } else if (upperhand[iOpen].rank == 1) {
+                setText(iOpen, 'Lose(A)');
+            } else if (lowerhand[iOpen].rank == 1) {
+                setText(iOpen, 'Win(A)');
+            }
+        }
 
-                if (!done[i])
-                    switch (i) {
-                        case 0:
-                        case 2:
-                            if (upperhand[i].rank > lowerhand[i].rank) {
-                                setText(i, 'Lose');
-                            } else if (upperhand[i].rank < lowerhand[i].rank) {
-                                setText(i, 'Win');
-                            } else {
-                                setText(i, 'Draw');
-                            }
-                            break;
-
-                        case 1:
-                            if (upperhand[i].rank < lowerhand[i].rank) {
-                                setText(i, 'Lose');
-                            } else if (upperhand[i].rank > lowerhand[i].rank) {
-                                setText(i, 'Win');
-                            } else {
-                                setText(i, 'Draw');
-                            }
-                            break;
-
-                        default:
-                            break;
+        if (!done[iOpen])
+            switch (iOpen) {
+                case 0:
+                case 2:
+                    if (upperhand[iOpen].rank > lowerhand[iOpen].rank) {
+                        setText(iOpen, 'Lose');
+                    } else if (upperhand[iOpen].rank < lowerhand[iOpen].rank) {
+                        setText(iOpen, 'Win');
+                    } else {
+                        setText(iOpen, 'Draw');
                     }
-            });
-        }, CARD_SPEED * 4 * i)
-    }
+                    break;
 
-    setTimeout(() => {
+                case 1:
+                    if (upperhand[iOpen].rank < lowerhand[iOpen].rank) {
+                        setText(iOpen, 'Lose');
+                    } else if (upperhand[iOpen].rank > lowerhand[iOpen].rank) {
+                        setText(iOpen, 'Win');
+                    } else {
+                        setText(iOpen, 'Draw');
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+        iOpen++;
+    }, CARD_SPEED);
+
+    if (iOpen == 2) {
+        $('#open').hide();
+
         let score = 0;
         for(let i = 0; i < wins.length; i++) {
             score += wins[i];
@@ -326,7 +333,7 @@ $('#close-bet').click(() => {
         }
 
         $('#new-game').show();
-    }, CARD_SPEED * 4 * 3);
+    }
 });
 
 $('#fold').click(() => {
