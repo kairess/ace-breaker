@@ -40,9 +40,9 @@ let init = () => {
     $('#deal').show();
     $('#bet-dealer').val(0);
     $('#bet-player').val(0);
-    $('#card-c0').text('');
-    $('#card-c1').text('');
-    $('#card-c2').text('');
+    $('#card-c0 .card-c-number').text('');
+    $('#card-c1 .card-c-number').text('');
+    $('#card-c2 .card-c-number').text('');
     $('#bet-dealer').hide();
     $('#bet-player').hide();
     $('#bet-slider').hide();
@@ -162,47 +162,49 @@ $('#bet-slider').on('input', () => {
 });
 
 let setText = (i, text) => {
+    const numberContainer = $(`#card-c${i} .card-c-number`);
+
     switch (text) {
         case 'Win(AB)':
-            $(`#card-c${i}`).text(text).css({color: 'darkblue'});
+            numberContainer.text(text).css({color: 'darkblue'});
             wins[i] = 1;
             times += 1;
             break;
         case 'Win(A)':
-            $(`#card-c${i}`).text(text).css({color: 'darkblue'});
+            numberContainer.text(text).css({color: 'darkblue'});
             wins[i] = 1;
             times += 0.5;
             break;
         case 'Win':
-            $(`#card-c${i}`).text(text).css({color: 'darkblue'});
+            numberContainer.text(text).css({color: 'darkblue'});
             wins[i] = 1;
             break;
         case 'Lose(AB)':
-            $(`#card-c${i}`).text(text).css({color: 'orangered'});
+            numberContainer.text(text).css({color: 'orangered'});
             wins[i] = -1;
             times += 1;
             break;
         case 'Lose(A)':
-            $(`#card-c${i}`).text(text).css({color: 'orangered'});
+            numberContainer.text(text).css({color: 'orangered'});
             wins[i] = -1;
             times += 0.5;
             break;
         case 'Lose':
-            $(`#card-c${i}`).text(text).css({color: 'orangered'});
+            numberContainer.text(text).css({color: 'orangered'});
             wins[i] = -1;
             break;
         case 'Draw(AB)':
-            $(`#card-c${i}`).text(text).css({color: 'black'});
+            numberContainer.text(text).css({color: 'black'});
             wins[i] = 0;
             times += 2;
             break;
         case 'Draw(A)':
-            $(`#card-c${i}`).text(text).css({color: 'black'});
+            numberContainer.text(text).css({color: 'black'});
             wins[i] = 0;
             times += 1;
             break;
         case 'Draw':
-            $(`#card-c${i}`).text(text).css({color: 'black'});
+            numberContainer.text(text).css({color: 'black'});
             wins[i] = 0;
             break;
         default:

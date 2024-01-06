@@ -98,25 +98,32 @@ a:visited {color:blue;}
 
 #card-c0 {
     position: absolute;
-    left:185px;
-    top:192px;
+    left:167px;
+    top:190px;
     z-index: 999;
-    font-size: 0.85em;
+    width: 69px;
+    text-align: center;
 }
 
 #card-c1 {
     position: absolute;
-    left:285px;
-    top:192px;
+    left:267px;
+    top:190px;
     z-index: 999;
-    font-size: 0.85em;
+    width: 69px;
+    text-align: center;
 }
 
 #card-c2 {
     position: absolute;
-    left:385px;
-    top:192px;
+    left:367px;
+    top:190px;
     z-index: 999;
+    width: 69px;
+    text-align: center;
+}
+
+span.card-c-number {
     font-size: 0.85em;
 }
 
