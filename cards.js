@@ -55,6 +55,11 @@ var cards = (function() {
         end = start + 5;
         opt.loop = 2;
         break;
+      case NUMBERS:
+        opt.acesHigh = false;
+        start = opt.acesHigh ? 2 : 1;
+        end = start + 9;
+        break;
     }
 
     opt.table = $(opt.table)[0];
