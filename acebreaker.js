@@ -49,6 +49,7 @@ let init = () => {
     $('#bet-slider').hide();
     $('#win-amount').hide();
     $('.high-low').hide();
+    $('#place-bet').hide();
     $('.pop').hide();
 
     upperHasJoker = false;
@@ -108,6 +109,8 @@ $('#redeal').click(() => {
     $('#redeal').hide();
     $('#place-bet').hide();
     jokerLower.el.hide();
+    lowerHasJoker = false;
+    upperHasJoker = false;
 
     for (let i = lowerhand.length - 1; i >= 0; i--) {
         lowerhand[i].hideCard();
@@ -119,6 +122,7 @@ $('#redeal').click(() => {
     setTimeout(() => {
         deck.deal(3, [lowerhand], CARD_SPEED, () => {
             $('#place-bet').show();
+            $('#fold').show();
 
             if (Math.random() < JOKER_PROB) {
                 lowerHasJoker = true;
