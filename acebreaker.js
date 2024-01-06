@@ -199,17 +199,17 @@ let setText = (i, text) => {
             wins[i] = -1;
             break;
         case 'Draw(AB)':
-            numberContainer.text(text).css({color: 'black'});
+            numberContainer.text(text).css({color: 'white'});
             wins[i] = 0;
             times += 2;
             break;
         case 'Draw(A)':
-            numberContainer.text(text).css({color: 'black'});
+            numberContainer.text(text).css({color: 'white'});
             wins[i] = 0;
             times += 1;
             break;
         case 'Draw':
-            numberContainer.text(text).css({color: 'black'});
+            numberContainer.text(text).css({color: 'white'});
             wins[i] = 0;
             break;
         default:
@@ -245,8 +245,6 @@ $('#close-bet').click(() => {
     } else if (betPlayer > playerMoney) {
         return alert('소지 금액보다 더 높은 금액을 베팅할 수 없습니다!');
     }
-
-    updatePlayerMoney(-betPlayer);
 
     $('#close-bet').hide();
     $('#fold').hide();
@@ -340,7 +338,7 @@ $('#open').click(() => {
                 winAmountText = '(' + winAmountText + ')' + `×${times}`;
 
             if (score > 0) {
-                updatePlayerMoney(winAmount);
+                updatePlayerMoney(winAmount + SCHOOL_MONEY);
                 $('#win-amount').text(winAmountText).css({color: 'deepskyblue'}).show();
             } else if (score < 0) {
                 updatePlayerMoney(-winAmount);
