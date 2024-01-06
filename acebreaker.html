@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ACE BREAKER - 빵형의 개발도상국</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="acebreaker.css"/>
+        <script src="jquery-1.7.min.js"></script>
+    </head>
+    <body>
+        <h1>ACE BREAKER</h1>
+
+        <img class="preload" src="img/cards.png"/>
+
+        <div id="card-table">
+            <button id="deal">DEAL</button>
+            <button id="redeal" style="display: none;">REDEAL</button>
+            <button id="place-bet" style="display: none;">PLACE BET</button>
+            <button id="close-bet" style="display: none;">CLOSE BET</button>
+            <button id="fold" style="display: none;">FOLD</button>
+            <button id="new-game" style="display: none;">NEW GAME</button>
+
+            <input type="number" id="bet-dealer" placeholder="DEALER"/>
+            <input type="number" id="bet-player" placeholder="PLAYER"/>
+
+            <div id="card-c0"></div>
+            <div id="card-c1"></div>
+            <div id="card-c2"></div>
+        </div>
+
+        <footer>
+            cards.js was created by <a href="http://einaregilsson.com">Einar Egilsson</a> and is licensed under the MIT license.
+        </footer>
+
+        <script src="deckType.js"></script>
+        <script src="cards.js"></script>
+        <script src="acebreaker.js"></script>
+    </body>
+</html>
